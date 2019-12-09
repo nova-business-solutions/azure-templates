@@ -40,7 +40,7 @@ permission=$4
 if [ ! -d "/etc/smbcredentials" ]; then
 sudo mkdir /etc/smbcredentials
 fi
-if [ ! -f "/etc/smbcredentials/danielwordpressst.cred" ]; then
+if [ ! -f "/etc/smbcredentials/$storagename.cred" ]; then
     sudo bash -c 'echo "username=$username" >> /etc/smbcredentials/$storagename.cred'
     sudo bash -c 'echo "password=$password" >> /etc/smbcredentials/$storagename.cred'
 fi
