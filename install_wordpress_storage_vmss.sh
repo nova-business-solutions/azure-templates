@@ -38,20 +38,20 @@ permission=$4
 
 
 if [ ! -d "/etc/smbcredentials" ]; then
-sudo mkdir /etc/smbcredentials
+mkdir /etc/smbcredentials
 fi
 if [ ! -f "/etc/smbcredentials/$storagename.cred" ]; then
-    sudo bash -c 'echo "username=$username" >> /etc/smbcredentials/$storagename.cred'
-    sudo bash -c 'echo "password=$password" >> /etc/smbcredentials/$storagename.cred'
+    echo "username=$username" >> /etc/smbcredentials/$storagename.cred
+    echo "password=$password" >> /etc/smbcredentials/$storagename.cred
 fi
 sudo chmod 600 /etc/smbcredentials/$storagename.cred
 
 if [ $permission == 'full' ]; then
-sudo bash -c 'echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab'
-sudo mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino
+    echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab
+    mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino
 fi
 
 if [ $permission == 'read' ]; then
-sudo bash -c 'echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino" >> /etc/fstab'
-sudo mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino
+    echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino" >> /etc/fstab
+    mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino
 fi
