@@ -46,12 +46,12 @@ if [ ! -f "/etc/smbcredentials/danielwordpressst.cred" ]; then
 fi
 sudo chmod 600 /etc/smbcredentials/$storagename.cred
 
-if [ $permission -eq 'full' ]; then
+if [ $permission == 'full' ]; then
 sudo bash -c 'echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab'
 sudo mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0777,file_mode=0777,serverino
 fi
 
-if [ $permission -eq 'read' ]; then
+if [ $permission == 'read' ]; then
 sudo bash -c 'echo "//$storagename.file.core.windows.net/wp-content /var/www/html/ cifs nofail,vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino" >> /etc/fstab'
 sudo mount -t cifs //$storagename.file.core.windows.net/wp-content /var/www/html/ -o vers=3.0,credentials=/etc/smbcredentials/$storagename.cred,dir_mode=0775,file_mode=0775,serverino
 fi
